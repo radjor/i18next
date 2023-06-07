@@ -328,7 +328,10 @@ class Translator extends EventEmitter {
     if (this.i18nFormat && this.i18nFormat.parse) {
       res = this.i18nFormat.parse(
         res,
-        { ...this.options.interpolation.defaultVariables, ...options },
+        {
+          ...this.options.interpolation.defaultVariables,
+          ...(options.replace && options.replace !== 'string' ? options.replace : options),
+        },
         resolved.usedLng,
         resolved.usedNS,
         resolved.usedKey,
